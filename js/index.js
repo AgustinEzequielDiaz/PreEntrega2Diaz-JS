@@ -1,95 +1,80 @@
-const productos = [];
+/* console.log(document.body); */ //muestra el contenido del elemento
+/* console.dir(document.body); */ //muestra las propiedas y eventos del elemento
+
+const body = document.body;
+console.log(body);
+
+/* const nombre = prompt("ingresa  tu nombre: "); */
+const nombre = "Agustin";
+/* body.innerHTML = "Hola Mundo!"; */
+/* body.innerHTML = `Hola ${nombre}!`; */
+
+const miDiv = document.getElementById("primerParrafo");
+console.log(miDiv);
+
+/* INNERTEXT Y MODIFICANDO CLASES */
+const parrafos = document.getElementsByClassName("targetParrafo");
+console.log(parrafos);
+
+/* parrafos[1].innerHTML = 'cambiado'; */
+
+for (const parrafo of parrafos) {
+    parrafo.innerHTML += 'Modificado.';
+}
+parrafos[0].innerText = "texto modificado."
+parrafos[0].className = "red"
 
 
-class Producto {
-    constructor() {
-        this.id = productos.length + 1;
-        this.nombre = prompt('Ingrese el nombre del producto').toUpperCase();
-        this.precio = parseFloat(prompt('Ingrese el precio'));
-        this.cantidad = parseInt(prompt('Ingrese la cantidad'));
-        this.url = prompt('Ingrese la url');
-    }
-};
+/* const input = document.getElementById("inputNombre");
+console.log(input.value);
+const nuevoParrafo = document.createElement('p');
+nuevoParrafo.innerText = 'contenido del parrafo'
+nuevoParrafo.className = 'red';
+console.log(nuevoParrafo);
+const padre = document.body;
+padre.append(nuevoParrafo);
+miDiv.append(nuevoParrafo);
+nuevoParrafo.remove(); */ //eliminar un elemento del DOM
 
+/* MODIFICANDO UN SELECT */
+const listaIdiomas = ['ingles', 'español', 'portugues', 'aleman', 'ruso'];
+const selectIdiomas = document.getElementById("miSelect");
+/* selectIdiomas.innerHTML; */
+const idiomaSeleccionado = 'aleman';
+listaIdiomas.forEach((idioma, index) => {
+    selectIdiomas.innerHTML += `<option ${idioma === idiomaSeleccionado ? 'selected' : ''}>${idioma}</option>`;
+});
 
-let opciones = prompt('Ingrese: \n1 - Agregar producto \n2 - Ver productos \n3 - Buscar producto \n0 - Salir');
-
-const agregarProductos = () => {
-    const newProducto = new Producto();
-    productos.push(newProducto);
-    console.log(productos);
+/* CREANDO OPCIONES DESDE UN ARRAY */
+let padre = document.getElementById("personas");
+let personas = ["HOMERO", "MARGE", "BART", "LISA", "MAGGIE"];
+for (const persona of personas) {
+    let li = document.createElement("li");
+    li.innerHTML = persona;
+    padre.appendChild(li);
 }
 
-const mostrarProductos = () => {
-    console.log('Carrito')
-    let acumulador = '';
-    let productosString = 'Carrito: \n';
-    let totalCompra = 0;
-    productos.forEach((producto, index) => {
-        console.log((index + 1), producto);
-        productosString += 'id: ' + producto.id + ' - ' + producto.nombre + ': ' + '$' +producto.precio + ' - ' + producto.cantidad + 'Unid.' + '\n';
-        totalCompra += producto.precio * producto.cantidad;
-        if(producto.url == ''){
-            producto.url = 'https://www.bicifan.uy/wp-content/uploads/2016/09/producto-sin-imagen.png';
-        }
-        acumulador += 
-        `
-        <div class="card card-hijo-bootstrap">
-            <img src="${producto.url}" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">${producto.nombre}</h5>
-                <p class="card-text">${'$' + producto.precio + ' - ' + producto.cantidad + 'Unid.'}</p>
-                <a href="#" class="btn btn-primary">Agregar</a>
-            </div>
-        </div>
-        `;
-    })
-    document.getElementById('padre-cards').innerHTML = acumulador;
-    productosString += '\n TOTAL: $' + totalCompra;
-    alert(productosString);
+/* CREANDO ELEMENTOS DESDE OBJETOS */
+const productos = [ { id:1, nombre:"Arroz", precio:124},
+                    { id:2, nombre:"Fideo", precio:70},
+                    { id:3, nombre:"Pan", precio:50},
+                    { id:4, nombre:"Flan", precio:100}];
+
+for(const producto of productos){
+    let contenedor = document.createElement("div");
+    contenedor.innerHTML = `<h3> ID: ${producto.id}</h3>
+                            <p> Producto: ${producto.nombre}</p>
+                            <b> $ ${producto.precio}</b>`;
+    document.body.appendChild(contenedor);
 }
 
-const buscarProducto = () => {
-    let resultadoBusqueda = 'Productos encontrados: \n';
-    let filtroProducto = prompt('Ingrese el nombre del producto que esta buscando:');
-    const productosEncontrados = productos.filter((el) => el.nombre.includes(filtroProducto.toUpperCase()));
-    if(productosEncontrados != '')
-    {
-        productosEncontrados.forEach((producto, index) => {
-            resultadoBusqueda += 'id: ' + producto.id + ' - ' + producto.nombre + ': ' + '$' +producto.precio + ' - ' + producto.cantidad + 'Unid.' + '\n';
-        });
-    }
-    else{
-        resultadoBusqueda = 'No se encontraron resultados para esa busqueda.'
-    }
-    alert(resultadoBusqueda);
-    console.log(productosEncontrados);
-}
+/* QUERY SELECTOR */
+const nodo = document.querySelector('.red');
+const nodo1 = document.querySelector('#miDiv');
+
+const nodoParrafos = document.querySelectorAll('.targetParrafo')
+console.log(nodoParrafos);
 
 
-const menu = (opcion) => {
-    switch (opcion) {
-        case '1':
-            agregarProductos();
-            break;
-
-        case '2':
-            mostrarProductos();
-            break;
-
-        case '3':
-            buscarProducto();
-            break;
-
-        default:
-            alert('Opcion incorrecta, intente nuevamente.');
-            break;
-    }
-    opciones = prompt('Ingrese: \n1 - Agregar producto \n2 - Ver productos \n3 - Buscar producto \n0 - Salir');
-}
-
-
-
-while (opciones !== '0') {
-    menu(opciones)
-}
+/* //////////////////////////////////////////////////////////// */
+console.log(body);

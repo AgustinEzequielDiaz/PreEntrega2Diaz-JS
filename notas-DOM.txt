@@ -1,0 +1,66 @@
+DOM (Document Object Model)
+
+-Estructura de objetos generada por el navegador, la cual representa la pagina HTML actual.
+-Con javaScript la empleamos para acceder y modificar de forma dinamica elementos de la interfaz. Es decir que por ejemplo desde js podemos modificar el 
+ contenido de una etiqueta HTML <h1>.
+-En el DOM cada etiqueta HTML, es un objeto, al que podemos llamar NODO.
+-Las etiquetas anidadas son llamadas NODOS HIJOS de las etiquetas NODO PADRE que las contiene.
+-Todos estos objetos son accesible usando javaScript mediante el objeto global Document.
+-El enlace de JavaScript en el HTML se le puede agregar un atributo para que se ejecute recien cuando lea todo el HTML y asi lo podriamos poner en el <head>
+ y no al final del <body>
+-El DOM tiene 12 tipos de nodos, los mas usados son:
+ *Document --> Nodo raiz del que derivan todo el resto de nodos del arbol
+ *Element --> Representa las etiquetas HTML. Puede contener atributos y derivar otros nodos de el
+ *Attr --> Se define para representar cada uno de los atributos de las etiquetas HTML (es decir uno para cada par atributo = valor).
+ *Text --> Nodo que contiene el texto encerrador por una etiqueta HTML.
+ *Comment --> Representa los comentarios incluidos en la pagina HTML.
+
+-getElementById() --> es un metodo que sirve para acceder a un elemento de la estructura HTML, utilizando su atributo ID como identificacion.
+-getElementByClassName() -->
+-getElementsByTagName() --> sirve para acceder a un conjunto de elementos de la estructura HTML, utilizando su nombre de etiqueta como identificacion. No es tan usada.
+-innerHTML -->
+-innerText --> esta propiedad nos permite modificar el nodo de texto de un elemento. Es decir, acceder y/o modificar el contenido textual de un elemento del DOM.
+-className --> a traves de esta propiedad podemos acceder al atributo class del mismo y definir cuales van a ser sus clases. 
+
+-Para recorrer HTMLcollections usamos For...of
+ --> for (const pais of paises){
+        console.log(pais.innetHTML);
+    } 
+ -->for (const div of contenedores){
+        console.log(div.innetHTML);
+    } 
+
+-creacion de elementos 
+ --> para crear elementos se utiliza la funcion document.createElement() y se debe indicar el nombre de etiqueta HTML que representara ese elemento
+     , luego debe agregarse como hijo el nodo creado con append(), al body o a otro nodo del documento actual
+ --> let parrafo = document.createElement("p");
+     parrafo.innerHTML = "<h2>¡Hola Coder!</h2>";
+     document.body.append(parrafo);
+
+-Obtener datos de Inputs
+ --> lo podemos lograr accediendo a la propiedad value de cada input seleccionado, mediante el DOM
+ --> //HTML
+     <input id="nombre" type="text">
+     //JS
+     document.getElementById("nombre").value = "HOMERO";   
+
+-Eliminar un elemento
+ --> nombreElemento.remove();  
+
+ -Creando Opciones desde un Array
+  --> let padre = document.getElementById("personas");
+      let personas = ["HOMERO", "MARGE", "BART", "LISA", "MAGGIE"];
+      for(const persona of personas){
+        let li = document.createElement("li");
+        li.innerHTML = persona;
+        padre.appendChild(li);
+      }
+
+-Las plantillas literales son las que nos permiten agregar texto y variables en un mismo string
+-if ternario --> condicion ? verdadero : falso;
+ --> 5 < 6 ? 'menor' : 'mayor';
+
+-querySelector --> nos permite seleccionar nodos con la misma sintaxis que utilizamos en los selectores de CSS, tambien aplica a pseudoclases, brindando mas precision
+               --> let radioChecked = document.querySelector(".radio:checked");
+               --> retorna el primer elemento que coincida con el parametro de busqueda, osea un solo elemento. Si quiere obtener todos los elementos usamos el metodo querySelectorAll();
+               
